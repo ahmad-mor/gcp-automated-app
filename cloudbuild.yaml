@@ -1,0 +1,24 @@
+steps:
+  # الخطوة 1: بناء صورة Docker بناءً على ملف الـ Dockerfile الموجود
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'me-central1-docker.pkg.dev/gcp-automated-app-21/my-app-repo/flask-app:latest', '.']
+
+  # الخطوة 2: رفع الصورة المبنية إلى مستودع الـ Artifact Registry الذي أنشأناه
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'me-central1-docker.pkg.dev/gcp-automated-app-21/my-app-repo/flask-app:latest']
+
+  # الخطوة 3: نشر الحاوية الجديدة تلقائياً على خدمة Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'my-automated-web-app'
+      - '--image=me-central1-docker.pkg.dev/gcp-automated-app-21/my-app-repo/flask-app:latest'
+      - '--region=me-central1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+
+# تحديد مكان حفظ الصور النهائي
+images:
+  - 'me-central1-docker.pkg.dev/gcp-automated-app-21/my-app-repo/flask-app:latest'
