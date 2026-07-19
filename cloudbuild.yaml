@@ -1,9 +1,9 @@
 steps:
-  # الخطوة 1: بناء صورة Docker بناءً على ملف الـ Dockerfile الموجود
+  # الخطوة 1: بناء صورة Docker
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'me-central1-docker.pkg.dev/gcp-automated-app-21/my-app-repo/flask-app:latest', '.']
 
-  # الخطوة 2: رفع الصورة المبنية إلى مستودع الـ Artifact Registry الذي أنشأناه
+  # الخطوة 2: رفع الصورة المبنية إلى مستودع الـ Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'me-central1-docker.pkg.dev/gcp-automated-app-21/my-app-repo/flask-app:latest']
 
@@ -22,3 +22,7 @@ steps:
 # تحديد مكان حفظ الصور النهائي
 images:
   - 'me-central1-docker.pkg.dev/gcp-automated-app-21/my-app-repo/flask-app:latest'
+
+# حل المشكلة: إجبار البناء على إرسال السجلات إلى Cloud Logging مباشرة
+options:
+  logging: CLOUD_LOGGING_ONLY
