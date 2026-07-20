@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 
 # تشغيل التطبيق باستخدام gunicorn وهو خادم الإنتاج الموصى به لـ Flask
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 app:app"]
