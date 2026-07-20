@@ -1,7 +1,6 @@
-# 🚀 Full-Stack Cloud Resume & Automated CI/CD Pipeline
+# 🚀 Automated GCP Web App & CI/CD Pipeline
 
-Welcome to my Cloud Resume Challenge project! This repository contains a dynamic web application built with Flask (Python), containerized using Docker, and deployed via a fully automated CI/CD pipeline on Google Cloud Platform (GCP).
-
+Welcome to my GCP automated application repository! This project contains a production-ready Flask web app, containerized with Docker, and deployed via a fully automated CI/CD pipeline on Google Cloud Platform.
 ## 🌐 Live Demo
 🔗 [View My Live Web App](https://my-automated-web-app-700385388090.me-central1.run.app) 
 
